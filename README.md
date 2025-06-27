@@ -1,16 +1,63 @@
-<<<<<<< HEAD
-# React + Vite
+# Food Fusion 🍽️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Food Fusion** é um sistema moderno de gerenciamento de estabelecimentos como restaurantes, lanchonetes, pizzarias e mercados. Desenvolvido com **React**, **Vite** e **Ant Design**, o projeto oferece uma interface rápida, responsiva e intuitiva para facilitar a administração de pedidos, cardápios, estatísticas e muito mais.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tecnologias Utilizadas
 
-## Expanding the ESLint configuration
+- [React](https://reactjs.org/) — biblioteca para criação de interfaces reativas
+- [Vite](https://vitejs.dev/) — build tool extremamente rápido e eficiente para desenvolvimento moderno em front-end
+- [Ant Design](https://ant.design/) — biblioteca de componentes visuais com design limpo e profissional
+- [TypeScript](https://www.typescriptlang.org/) *(opcional)* — tipagem estática para maior robustez
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-=======
-# food-fusion-frontend
->>>>>>> 1acb873ae3abec077ed93f0cedc16c2f64105ba0
+---
+
+## 🧩 Funcionalidades
+
+- Cadastro e gerenciamento de estabelecimentos
+- Gestão de cardápios e itens do menu
+- Controle de pedidos em tempo real
+- Visualização de estatísticas e métricas operacionais
+- Interface adaptável a dispositivos móveis
+
+---
+
+## 📦 Instalação e Execução Local
+
+```bash
+# Clone o repositório
+git clone https://github.com/eduardowgmendes/food-fusion-frontend.git
+
+# Acesse o diretório
+cd food-fusion-frontend
+
+# Instale as dependências
+npm install
+
+# Inicie o servidor de desenvolvimento
+npm run dev
+```
+
+O aplicativo estará disponível em: http://localhost:5173
+
+---
+
+## 🛠 Estrutura do Projeto
+
+```bash
+src/
+├── assets/         # Imagens e arquivos estáticos
+├── components/     # Componentes reutilizáveis da interface
+├── pages/          # Páginas principais do sistema
+├── services/       # Serviços e integração com APIs
+├── utils/          # Funções auxiliares
+└── App.tsx         # Componente raiz da aplicação
+```
+
+---
+
+## 📷 Capturas de Tela
+![Dashboard]()
+![Dashboard]()
+![Dashboard]()
