@@ -1,0 +1,121 @@
+[
+    {
+        "id": 12,
+        "establishment": {
+            "name": "Pasta Palace",
+            "description": "Traditional Italian pasta dishes prepared with fresh ingredients and rich sauces.",
+            "type": "ITALIAN"
+        },
+        "items": 1,
+        "paymentMethod": "BANK_TRANSFER",
+        "client": "Eduardo Mendes",
+        "price": "109,90",
+        "currency": "BRL",
+        "title": "Lasagna Bolognese",
+        "description": "Layers of pasta, rich meat sauce, creamy béchamel, and mozzarella cheese, baked to perfection.",
+        "createdAt": "2025-05-07T16:11:00.789123",
+        "status": "FINISHED"
+    },
+    {
+        "id": 13,
+        "establishment": {
+            "name": "The Curry House",
+            "description": "Authentic Indian curries and freshly baked naan bread.",
+            "type": "INDIAN"
+        },
+        "items": 1,
+        "paymentMethod": "CASH",
+        "client": "Eduardo Mendes",
+        "price": "159,90",
+        "currency": "BRL",
+        "title": "Chicken Tikka Masala",
+        "description": "Tender chunks of chicken marinated in yogurt and spices, cooked in a creamy, spiced tomato sauce.",
+        "createdAt": "2025-05-07T16:11:00.789123",
+        "status": "FINISHED"
+    },
+    {
+        "id": 14,
+        "establishment": {
+            "name": "Pizza Perfection",
+            "description": "Hand-tossed, wood-fired pizzas with fresh ingredients and homemade dough.",
+            "type": "ITALIAN"
+        },
+        "items": 1,
+        "paymentMethod": "CASH",
+        "client": "Eduardo Mendes",
+        "price": "89,90",
+        "currency": "BRL",
+        "title": "Pepperoni Explosion",
+        "description": "Crispy pepperoni slices, mozzarella cheese, and zesty tomato sauce on a thin, hand-tossed crust.",
+        "createdAt": "2025-05-07T16:11:00.789123",
+        "status": "FINISHED"
+    },
+    {
+        "id": 15,
+        "establishment": {
+            "name": "Seafood Shack",
+            "description": "Fresh seafood dishes with a seaside vibe.",
+            "type": "SEAFOOD"
+        },
+        "items": 1,
+        "paymentMethod": "CASH",
+        "client": "Eduardo Mendes",
+        "price": "229,90",
+        "currency": "BRL",
+        "title": "Garlic Butter Shrimp",
+        "description": "Juicy, buttery shrimp sautéed in garlic and herbs, served with a side of lemon butter sauce.",
+        "createdAt": "2025-05-07T16:11:00.789123",
+        "status": "FINISHED"
+    },
+    {
+        "id": 1,
+        "establishment": {
+            "name": "Marvin Sticks",
+            "description": "A casual eatery specializing in delicious skewers and grilled bites. From savory chicken sticks to a variety of other mouthwatering meats.",
+            "type": "AMERICAN"
+        },
+        "items": 1,
+        "paymentMethod": "CASH",
+        "client": "Eduardo Mendes",
+        "price": "199,98",
+        "currency": "BRL",
+        "title": "Southern Fried Chicken",
+        "description": "Crispy fried chicken marinated in buttermilk and seasoned with a special blend of spices. Served with coleslaw and biscuits.",
+        "createdAt": "2025-05-08T14: 30: 00Z",
+        "status": "FINISHED"
+    },
+    {
+        "id": 2,
+        "establishment": {
+            "name": "Bella Italia",
+            "description": "Authentic Italian cuisine with a modern twist. Fresh pasta, wood-fired pizzas, and classic desserts.",
+            "type": "ITALIAN"
+        },
+        "items": 1,
+        "paymentMethod": "MOBILE_PAYMENT",
+        "client": "Eduardo Mendes",
+        "price": "129,90",
+        "currency": "BRL",
+        "title": "Spaghetti Carbonara",
+        "description": "Creamy spaghetti with crispy pancetta, egg yolks, Pecorino cheese, and freshly ground black pepper.",
+        "createdAt": "2025-05-08T13: 15: 00Z",
+        "status": "FINISHED"
+    },
+    {
+        "id": 3,
+        "establishment": {
+            "name": "Sushi Zen",
+            "description": "A premium sushi bar offering fresh, high-quality Japanese cuisine.",
+            "type": "JAPANESE"
+        },
+        "items": 1,
+        "paymentMethod": "DIGITAL_WALLET",
+        "client": "Eduardo Mendes",
+        "price": "189,50",
+        "currency": "BRL",
+        "title": "Sashimi Platter",
+        "description": "An assortment of fresh, thinly sliced raw fish served with soy sauce, wasabi, and pickled ginger.",
+        "createdAt": "2025-05-08T12: 45: 00Z",
+        "status": "FINISHED"
+    }
+]

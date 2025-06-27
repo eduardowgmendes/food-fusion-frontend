@@ -1,0 +1,104 @@
+[
+    {
+        "id": 6,
+        "establishment": {
+            "name": "Burger Factory",
+            "description": "A modern burger joint serving gourmet burgers and crispy sides.",
+            "type": "AMERICAN"
+        },
+        "items": 1,
+        "paymentMethod": "CREDIT_CARD",
+        "client": "Eduardo Mendes",
+        "price": "79,90",
+        "currency": "BRL",
+        "title": "Double Bacon Cheeseburger",
+        "description": "Two juicy beef patties topped with crispy bacon, cheddar cheese, lettuce, tomato, and a special house sauce.",
+        "createdAt": "2025-05-07T18: 45: 00Z",
+        "status": "PREPARING"
+    },
+    {
+        "id": 7,
+        "establishment": {
+            "name": "Pasta Palace",
+            "description": "Traditional Italian pasta dishes prepared with fresh ingredients and rich sauces.",
+            "type": "ITALIAN"
+        },
+        "items": 1,
+        "paymentMethod": "CREDIT_CARD",
+        "client": "Valdir Sobrinho",
+        "price": "129,90",
+        "currency": "BRL",
+        "title": "Fettuccine Alfredo",
+        "description": "Creamy fettuccine pasta with a rich Alfredo sauce and a sprinkle of Parmesan cheese.",
+        "createdAt": "2025-05-06T12: 30: 00Z",
+        "status": "PREPARING"
+    },
+    {
+        "id": 8,
+        "establishment": {
+            "name": "The Curry House",
+            "description": "Authentic Indian curries and freshly baked naan bread.",
+            "type": "INDIAN"
+        },
+        "items": 1,
+        "paymentMethod": "PIX",
+        "client": "Daniella Pedroso",
+        "price": "149,90",
+        "currency": "BRL",
+        "title": "Butter Chicken",
+        "description": "Tender chicken cooked in a rich, creamy tomato-based sauce with a blend of Indian spices.",
+        "createdAt": "2025-05-05T19: 20: 00Z",
+        "status": "PREPARING"
+    },
+    {
+        "id": 9,
+        "establishment": {
+            "name": "Pizza Perfection",
+            "description": "Hand-tossed, wood-fired pizzas with fresh ingredients and homemade dough.",
+            "type": "ITALIAN"
+        },
+        "items": 1,
+        "paymentMethod": "DEBIT_CARD",
+        "client": "Eduarda Mendes",
+        "price": "99,90",
+        "currency": "BRL",
+        "title": "Margherita Pizza",
+        "description": "Classic pizza with fresh tomato sauce, mozzarella cheese, and basil leaves.",
+        "createdAt": "2025-05-04T20: 00: 00Z",
+        "status": "PREPARING"
+    },
+    {
+        "id": 10,
+        "establishment": {
+            "name": "Seafood Shack",
+            "description": "Fresh seafood dishes with a seaside vibe.",
+            "type": "SEAFOOD"
+        },
+        "items": 1,
+        "paymentMethod": "DEBIT_CARD",
+        "client": "Vaneska Marroni",
+        "price": "199,90",
+        "currency": "BRL",
+        "title": "Grilled Lobster Tail",
+        "description": "Juicy lobster tail grilled to perfection and served with garlic butter.",
+        "createdAt": "2025-05-03T17: 15: 00Z",
+        "status": "PREPARING"
+    },
+    {
+        "id": 11,
+        "establishment": {
+            "name": "Burger Factory",
+            "description": "A modern burger joint serving gourmet burgers and crispy sides.",
+            "type": "AMERICAN"
+        },
+        "items": 1,
+        "paymentMethod": "CREDIT_CARD",
+        "client": "Eduardo Mendes",
+        "price": "89,90",
+        "currency": "BRL",
+        "title": "BBQ Pulled Pork Sandwich",
+        "description": "Slow-cooked pulled pork smothered in smoky barbecue sauce, topped with coleslaw on a toasted brioche bun.",
+        "createdAt": "2025-05-07T16:11:00.789123",
+        "status": "PREPARING"
+    }
+]

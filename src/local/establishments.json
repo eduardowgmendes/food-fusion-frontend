@@ -1,0 +1,374 @@
+[
+    {
+        "id": 1,
+        "name": "Marvin Sticks",
+        "description": "A casual eatery specializing in delicious skewers and grilled bites. From savory chicken sticks to a variety of other mouthwatering meats.",
+        "type": "AMERICAN",
+        "logo": "skewer-logo",
+        "backdrop": null,
+        "addresses": [],
+        "phones": [],
+        "menus": [
+            {
+                "name": "Gourmet American Fare",
+                "description": "Elevating classic American comfort food with gourmet twists and premium ingredients to deliver a truly indulgent experience.",
+                "items": [
+                    {
+                        "name": "Wagyu Beef Burger",
+                        "description": "Juicy Wagyu beef patty served on a brioche bun with aged cheddar, caramelized onions, and truffle aioli.",
+                        "showcasePictures": [
+                            {
+                                "id": 1,
+                                "base64": "base64-image-1901"
+                            },
+                            {
+                                "id": 2,
+                                "base64": "base64-image-1902"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Southern Fried Chicken",
+                        "description": "Crispy fried chicken marinated in buttermilk and seasoned with a special blend of spices. Served with coleslaw and biscuits.",
+                        "showcasePictures": [
+                            {
+                                "id": 3,
+                                "base64": "base64-image-2001"
+                            },
+                            {
+                                "id": 4,
+                                "base64": "base64-image-2002"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "New England Lobster Roll",
+                        "description": "Fresh lobster meat tossed in a light lemon mayo dressing, served in a toasted split-top bun.",
+                        "showcasePictures": [
+                            {
+                                "id": 5,
+                                "base64": "base64-image-2101"
+                            },
+                            {
+                                "id": 6,
+                                "base64": "base64-image-2102"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Mac and Cheese Deluxe",
+                        "description": "Rich and creamy mac and cheese topped with crispy breadcrumbs, truffle oil, and a blend of gourmet cheeses.",
+                        "showcasePictures": [
+                            {
+                                "id": 7,
+                                "base64": "base64-image-2201"
+                            },
+                            {
+                                "id": 8,
+                                "base64": "base64-image-2202"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Apple Pie with Ice Cream",
+                        "description": "Classic American apple pie with a flaky crust, served warm with a scoop of vanilla ice cream.",
+                        "showcasePictures": [
+                            {
+                                "id": 9,
+                                "base64": "base64-image-2301"
+                            },
+                            {
+                                "id": 10,
+                                "base64": "base64-image-2302"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Gourmet American Fare",
+                "description": "Elevating classic American comfort food with gourmet twists and premium ingredients to deliver a truly indulgent experience.",
+                "items": null
+            },
+            {
+                "name": "Gourmet American Fare",
+                "description": "Elevating classic American comfort food with gourmet twists and premium ingredients to deliver a truly indulgent experience.",
+                "items": null
+            },
+            {
+                "name": "Gourmet American Fare",
+                "description": "Elevating classic American comfort food with gourmet twists and premium ingredients to deliver a truly indulgent experience.",
+                "items": null
+            },
+            {
+                "name": "Gourmet American Fare",
+                "description": "Elevating classic American comfort food with gourmet twists and premium ingredients to deliver a truly indulgent experience.",
+                "items": null
+            },
+            {
+                "name": "Gourmet American Fare",
+                "description": "Elevating classic American comfort food with gourmet twists and premium ingredients to deliver a truly indulgent experience.",
+                "items": null
+            },
+            {
+                "name": "Gourmet American Fare",
+                "description": "Elevating classic American comfort food with gourmet twists and premium ingredients to deliver a truly indulgent experience.",
+                "items": null
+            },
+            {
+                "name": "Gourmet American Fare",
+                "description": "Elevating classic American comfort food with gourmet twists and premium ingredients to deliver a truly indulgent experience.",
+                "items": null
+            },
+            {
+                "name": "Gourmet American Fare",
+                "description": "Elevating classic American comfort food with gourmet twists and premium ingredients to deliver a truly indulgent experience.",
+                "items": null
+            },
+            {
+                "name": "Gourmet American Fare",
+                "description": "Elevating classic American comfort food with gourmet twists and premium ingredients to deliver a truly indulgent experience.",
+                "items": null
+            },
+            {
+                "name": "Gourmet American Fare",
+                "description": "Elevating classic American comfort food with gourmet twists and premium ingredients to deliver a truly indulgent experience.",
+                "items": null
+            },
+            {
+                "name": "Gourmet American Fare",
+                "description": "Elevating classic American comfort food with gourmet twists and premium ingredients to deliver a truly indulgent experience.",
+                "items": null
+            }
+            
+        ],
+        "emails": [],
+        "serviceTimes": [
+            {
+                "name": "Every Day",
+                "opensAt": "08:00:00",
+                "closesAt": "23:30:00"
+            },
+            {
+                "name": "Sundays & Holidays",
+                "opensAt": "09:00:00",
+                "closesAt": "12:30:00"
+            },
+            {
+                "name": "Saturdays",
+                "opensAt": "09:00:00",
+                "closesAt": "21:00:00"
+            }
+        ],
+        "createdAt": "2025-05-07T16:08:46.896859",
+        "updatedAt": null,
+        "deletedAt": null,
+        "deleted": false
+    },
+    {
+        "id": 2,
+        "name": "Pasta Palace",
+        "description": "Classic Italian cuisine with handmade pasta and fresh sauces.",
+        "type": "ITALIAN",
+        "logo": "pasta-logo",
+        "backdrop": null,
+        "addresses": [],
+        "phones": [],
+        "menus": [],
+        "emails": [],
+        "serviceTimes": [
+            {
+                "name": "Weekdays",
+                "opensAt": "11:00:00",
+                "closesAt": "22:00:00"
+            },
+            {
+                "name": "Weekends",
+                "opensAt": "12:00:00",
+                "closesAt": "23:00:00"
+            }
+        ],
+        "createdAt": "2025-05-07T16:10:00.123456",
+        "updatedAt": null,
+        "deletedAt": null,
+        "deleted": false
+    },
+    {
+        "id": 3,
+        "name": "Sushi Zen",
+        "description": "A taste of Japan with fresh sushi, sashimi, and creative rolls.",
+        "type": "JAPANESE",
+        "logo": "sushi-logo",
+        "backdrop": null,
+        "addresses": [],
+        "phones": [],
+        "menus": [],
+        "emails": [],
+        "serviceTimes": [
+            {
+                "name": "Every Day",
+                "opensAt": "10:00:00",
+                "closesAt": "22:00:00"
+            }
+        ],
+        "createdAt": "2025-05-07T16:11:00.789123",
+        "updatedAt": null,
+        "deletedAt": null,
+        "deleted": false
+    },
+    {
+        "id": 4,
+        "name": "Tandoori House",
+        "description": "Spicy and flavorful Indian dishes cooked in a traditional clay oven.",
+        "type": "INDIAN",
+        "logo": "tandoori-logo",
+        "backdrop": null,
+        "addresses": [],
+        "phones": [],
+        "menus": [],
+        "emails": [],
+        "serviceTimes": [
+            {
+                "name": "Weekdays",
+                "opensAt": "11:30:00",
+                "closesAt": "22:30:00"
+            }
+        ],
+        "createdAt": "2025-05-07T16:12:00.456789",
+        "updatedAt": null,
+        "deletedAt": null,
+        "deleted": false
+    },
+    {
+        "id": 5,
+        "name": "Fiesta Mexicana",
+        "description": "Vibrant flavors of Mexico, with fresh tacos, burritos, and sizzling fajitas.",
+        "type": "MEXICAN",
+        "logo": "fiesta-logo",
+        "backdrop": null,
+        "addresses": [],
+        "phones": [],
+        "menus": [],
+        "emails": [],
+        "serviceTimes": [],
+        "createdAt": "2025-05-07T16:13:00.987654",
+        "updatedAt": null,
+        "deletedAt": null,
+        "deleted": false
+    },
+    {
+        "id": 6,
+        "name": "Bistro Paris",
+        "description": "Classic French bistro with fine wines, cheese platters, and fresh baguettes.",
+        "type": "FRENCH",
+        "logo": "bistro-logo",
+        "backdrop": null,
+        "addresses": [],
+        "phones": [],
+        "menus": [],
+        "emails": [],
+        "serviceTimes": [
+            {
+                "name": "Weekdays",
+                "opensAt": "09:00:00",
+                "closesAt": "21:00:00"
+            }
+        ],
+        "createdAt": "2025-05-07T16:14:00.111222",
+        "updatedAt": null,
+        "deletedAt": null,
+        "deleted": false
+    },
+    {
+        "id": 7,
+        "name": "Mamma's Kitchen",
+        "description": "Traditional Mediterranean dishes with fresh herbs and bold flavors.",
+        "type": "MEDITERRANEAN",
+        "logo": "mediterranean-logo",
+        "backdrop": null,
+        "addresses": [],
+        "phones": [],
+        "menus": [],
+        "emails": [],
+        "serviceTimes": [
+            {
+                "name": "Every Day",
+                "opensAt": "10:00:00",
+                "closesAt": "22:00:00"
+            }
+        ],
+        "createdAt": "2025-05-07T16:15:00.333444",
+        "updatedAt": null,
+        "deletedAt": null,
+        "deleted": false
+    },
+    {
+        "id": 8,
+        "name": "Tapas Y Vino",
+        "description": "A taste of Spain with classic tapas, fine wines, and fresh seafood.",
+        "type": "SPANISH",
+        "logo": "tapas-logo",
+        "backdrop": null,
+        "addresses": [],
+        "phones": [],
+        "menus": [],
+        "emails": [],
+        "serviceTimes": [
+            {
+                "name": "Weekends",
+                "opensAt": "12:00:00",
+                "closesAt": "23:00:00"
+            }
+        ],
+        "createdAt": "2025-05-07T16:16:00.555666",
+        "updatedAt": null,
+        "deletedAt": null,
+        "deleted": false
+    },
+    {
+        "id": 9,
+        "name": "Gyros Express",
+        "description": "Authentic Greek street food with fresh gyros, souvlaki, and salads.",
+        "type": "GREEK",
+        "logo": "gyros-logo",
+        "backdrop": null,
+        "addresses": [],
+        "phones": [],
+        "menus": [],
+        "emails": [],
+        "serviceTimes": [
+            {
+                "name": "Every Day",
+                "opensAt": "10:00:00",
+                "closesAt": "22:00:00"
+            }
+        ],
+        "createdAt": "2025-05-07T16:17:00.777888",
+        "updatedAt": null,
+        "deletedAt": null,
+        "deleted": false
+    },
+    {
+        "id": 10,
+        "name": "Seoul Street",
+        "description": "Modern Korean street food with bold flavors and spicy dishes.",
+        "type": "KOREAN",
+        "logo": "seoul-logo",
+        "backdrop": null,
+        "addresses": [],
+        "phones": [],
+        "menus": [],
+        "emails": [],
+        "serviceTimes": [
+            {
+                "name": "Every Day",
+                "opensAt": "10:00:00",
+                "closesAt": "22:00:00"
+            }
+        ],
+        "createdAt": "2025-05-07T16:18:00.999000",
+        "updatedAt": null,
+        "deletedAt": null,
+        "deleted": false
+    }
+]
