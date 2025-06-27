@@ -47,17 +47,12 @@ O aplicativo estará disponível em: http://localhost:5173
 
 ```bash
 src/
-├── assets/         # Imagens e arquivos estáticos
-├── components/     # Componentes reutilizáveis da interface
-├── pages/          # Páginas principais do sistema
-├── services/       # Serviços e integração com APIs
+├── api/            # Cliente que consulta a API FoodFusion Api
+├── assets/         # Arquivos como imagens e sons
+├── components/     # Componentes como gerenciadores de layout, listas customizadas, painéis e etc. 
+├── configuration/  # Arquivos de configuração de components de UI
+├── local/          # Arquivos de testes para mocks
+├── pages/          # Páginas da aplicação
 ├── utils/          # Funções auxiliares
-└── App.tsx         # Componente raiz da aplicação
+└── App.jsx         # Componente raiz da aplicação
 ```
-
----
-
-## 📷 Capturas de Tela
-![Dashboard]()
-![Dashboard]()
-![Dashboard]()
