@@ -1,12 +1,13 @@
-import { Card, Col, Flex, Row, Select, Table, theme } from "antd";
+import { Card, Col, Flex, List, Row, Segmented, Select, Spin, Table, theme, Tooltip } from "antd";
 import Section from "../layout/Section";
 import { Area, Bar, Column, Funnel, Heatmap, Line, Pie } from "@ant-design/charts";
 import Title from "antd/es/typography/Title";
 import Paragraph from "antd/es/typography/Paragraph";
 import inProgressOrders from "../../local/in-progress-orders.json"
 import lastOrders from "../../local/last-orders.json"
-import { orderCentralTableColumnDefault } from "../../configuration/orderCentralTableColumnDefault";
+import { dashboardOrdersTableColumnDefault } from "../../configuration/dashboardOrdersTableColumnDefault";
 import { useEffect, useState } from "react";
+import { AppstoreOutlined, BarsOutlined, LoadingOutlined } from "@ant-design/icons";
 
 export default function GeneralDashboardView(props) {
 
@@ -421,150 +422,194 @@ export default function GeneralDashboardView(props) {
         }
     };
 
-    const handleChange = (value) => {
+    const dashboardSections = [
+        {
+            title: "Pedidos ao longo do tempo",
+            description: "Visualize a evolução da demanda ao longo do dia, semana ou mês e identifique padrões de consumo.",
+            tooltip: "Ajuda a planejar horários de produção e turnos com base no fluxo de pedidos.",
+            chart: <Line data={ordersOverTime} xField="date" yField="orders" {...lineChartConfig} />
+        },
+        {
+            title: "Frequência de Vendas por Período",
+            description: "Compreenda a constância das vendas e descubra os períodos de maior e menor atividade.",
+            tooltip: "Avalia a consistência das vendas em diferentes datas ou turnos.",
+            chart: <Column data={salesFrequency} colorField="frequency" xField="date" yField="frequency" {...barChartConfig} />
+        },
+        {
+            title: "Categorias de Produto mais Vendidas",
+            description: "Compare o desempenho das categorias para entender quais segmentos impulsionam o faturamento.",
+            tooltip: "Permite foco em categorias estratégicas para promoções ou reposição de estoque.",
+            chart: <Bar data={productCategoryComparison} xField="category" colorField="category" yField="orders" {...columnChartConfig} />
+        },
+        {
+            title: "Canais de Venda",
+            description: "Analise a participação de cada canal (app, balcão, delivery) nas vendas totais.",
+            tooltip: "Orienta decisões de investimento e ações promocionais por canal.",
+            chart: <Pie data={salesChannelsParticipation} colorField="channel" angleField="value" {...basicPieChartConfig} />
+        },
+        {
+            title: "Taxa de Conversão",
+            description: "Veja quantos visitantes realmente concluem um pedido e otimize pontos de atrito.",
+            tooltip: "Ajuda a identificar gargalos no funil de vendas e oportunidades de melhoria.",
+            chart: <Funnel data={conversionRate} xField="step" yField="value" label={{ text: (d) => `${d.step} \n ${d.value}` }} {...funnelChartConfig} />
+        },
+        {
+            title: "Tipos de Pedido",
+            description: "Verifique a proporção entre pedidos para entrega, retirada ou consumo no local.",
+            tooltip: "Facilita decisões logísticas e melhorias no atendimento por modalidade.",
+            chart: <Pie data={orderTypeDistribution} colorField="type" angleField="value" {...basicPieChartConfig} />
+        },
+        {
+            title: "Tempo Médio de Preparo por Categoria",
+            description: "Meça o desempenho operacional e identifique gargalos por tipo de produto.",
+            tooltip: "Permite identificar categorias que atrasam entregas ou impactam a experiência do cliente.",
+            chart: <Bar theme={props.theme} data={avgPrepTimeByCategory} xField="category" yField="time" colorField="category" group />
+        },
+        {
+            title: "Comparativo de Vendas (Diário/Semanal)",
+            description: "Compare o desempenho entre dias e semanas para identificar tendências de crescimento ou queda.",
+            tooltip: "Ajuda no planejamento de promoções e avaliação de ações recentes.",
+            chart: <Line data={weeklySalesComparison} theme={props.theme} colorField="item" seriesField="item" xField={(d) => new Date(d.date)} yField="orders" />
+        },
+        {
+            title: "Cancelamentos e Reembolsos",
+            description: "Acompanhe a evolução dos cancelamentos e reembolsos para detectar problemas recorrentes.",
+            tooltip: "Permite identificar causas e horários com maiores taxas de cancelamento.",
+            chart: (
+                <Area
+                    data={cancelRefundTrends}
+                    xField="date"
+                    yField="count"
+                    theme={props.theme}
+                    interaction={{ tooltip: { marker: false } }}
+                    point={{ sizeField: 4, style: { stroke: 'orangered', fill: '#fff' } }}
+                    line={{ style: { stroke: 'orangered', lineWidth: 2 } }}
+                    style={{
+                        fill: `linear-gradient(-90deg, ${props.theme === 'light' ? '#fff' : 'transparent'}, orangered 100%)`
+                    }}
+                />
+            )
+        },
+        {
+            title: "Comparativo entre Estabelecimentos",
+            description: "Compare o desempenho de diferentes unidades ou franquias em relação às vendas.",
+            tooltip: "Facilita análises regionais e decisões de investimento ou padronização.",
+            actions: [{
+                type: 'select',
+                select: {
+                    defaultValue: '1',
+                    size: 'large',
+                    placeholder: 'Estabelecimento',
+                    tooltip: 'Comparar com outro Estabelecimento',
+                    onChange: (value) => {
+                        console.log(value);
+                    },
+                    options: [
+                        { value: '1', label: 'Papa' },
+                        { value: '2', label: 'Beta' },
+                        { value: '3', label: 'Mike' },
+                        { value: '4', label: 'Vue' }
+                    ]
+                }
+            }],
+            chart: <Line theme={props.theme} data={establishmentsComparison} xField="establishment" yField="sales" />
+        },
+        {
+            title: "Horários de Pico e Sazonalidade",
+            description: "Identifique os horários e dias de maior movimento para melhor alocação de recursos.",
+            tooltip: "Permite ajustar escalas de equipe, estoque e campanhas para horários estratégicos.",
+            chart: <Heatmap theme={props.theme} data={peakTimesSeasonality} xField="hour" yField="orders" colorField="cancels" sizeField={26} />
+        }
+    ];
+
+    const [viewMode, setViewMode] = useState('list');
+    const [loading, setLoading] = useState(false);
+
+    const handleṔeriodChange = (value) => {
+        setLoading(true)
         setPeriod(value)
+        setTimeout(() => {
+            setLoading(false)
+        }, 300)
+    }
+
+    const handleViewChange = (value) => {
+        setLoading(true)
+        setViewMode(value)
+        setTimeout(() => {
+            setLoading(false)
+        }, 300)
     }
 
     return (
         <Flex vertical gap={'large'}>
 
-            <Row gutter={[16, 16]}>
+            <Flex align="start" flex={1} gap={'middle'} style={{ width: '100%' }}>
 
-                <Col span={24}>
-                    <Flex align="start" flex={1} gap={'middle'} style={{ width: '100%' }}>
-                        <Flex vertical flex={1}>
-                            <Title level={2} style={{ margin: 0 }} ellipsis={{ rows: 1, expandable: false, symbol: '...' }}>Resumo Geral</Title>
-                            <Paragraph type="secondary" style={{ margin: 0 }} ellipsis={{ rows: 1, expandable: false, symbol: '...' }}>Todos os Estabelecimentos</Paragraph>
-                        </Flex>
-                        <Select style={{ minWidth: 128 }} size="large" defaultValue={'today'} onChange={handleChange} options={[
+                <Flex vertical flex={1}>
+                    <Title level={2} style={{ margin: 0 }} ellipsis={{ rows: 1, expandable: false, symbol: '...' }}>Resumo Geral</Title>
+                    <Paragraph type="secondary" style={{ margin: 0 }} ellipsis={{ rows: 1, expandable: false, symbol: '...' }}>Todos os Estabelecimentos</Paragraph>
+                </Flex>
+
+                <Flex align="center" gap={'small'}>
+
+                    <Tooltip title='Selecionar modo de visualização'>
+                        <Segmented size="large" onChange={handleViewChange} options={[
+                            { value: 'list', icon: <BarsOutlined /> },
+                            { value: 'kanbam', icon: <AppstoreOutlined /> }]} />
+                    </Tooltip>
+
+                    <Tooltip title='Selecionar período'>
+                        <Select style={{ minWidth: 128 }} size="large" defaultValue={'today'} onChange={handleṔeriodChange} options={[
                             { value: 'today', label: 'Hoje' },
                             { value: 'yesterday', label: 'Ontem' },
                             { value: 'lastThirtyDays', label: 'Últimos 30 dias' },
                             { value: 'lastSixtyDays', label: 'Últimos 60 dias' }]} />
-                    </Flex>
-                </Col>
+                    </Tooltip>
 
-                <Card variant="outlined" size="small">
+                </Flex>
 
-                    <Row gutter={[16, 16]} style={{ overflowX: 'hidden', overflowY: 'auto', height: '75vh' }}>
+            </Flex>
 
-                        <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
-                            <Section
-                                title="Pedidos ao longo do tempo"
-                                description="Visualize a evolução da demanda ao longo do dia, semana ou mês e identifique padrões de consumo."
-                                helper={{ tooltip: 'Ajuda a planejar horários de produção e turnos com base no fluxo de pedidos.' }}
-                                contents={<Line data={ordersOverTime} xField="date" yField="orders" {...lineChartConfig} />}
-                            />
-                        </Col>
+            <Flex vertical flex={1}>
 
-                        <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
-                            <Section
-                                title="Frequência de Vendas por Período"
-                                description="Compreenda a constância das vendas e descubra os períodos de maior e menor atividade."
-                                helper={{ tooltip: 'Avalia a consistência das vendas em diferentes datas ou turnos.' }}
-                                contents={<Column data={salesFrequency} colorField="frequency" xField="date" yField="frequency" {...barChartConfig} />}
-                            />
-                        </Col>
+                <Flex vertical gap={'large'} flex={1}>
+                    {loading ? (<Flex vertical align="center" justify="center" style={{ height: '100vh' }} gap={'small'}>
+                        <Flex align="center" gap={'small'}>
+                            <Spin size="large" indicator={<LoadingOutlined spin />} tip="Carregando dados da API" />
+                        </Flex>
+                    </Flex>) :
+                        <Flex vertical gap={'small'}>
+                            {viewMode === 'list' ?
+                                <List style={{ flex: 1 }} dataSource={dashboardSections} renderItem={(section) => (
+                                    <List.Item>
+                                        <Flex vertical align="stretch" flex={1} style={{ margin: '1rem 0 1rem 0' }}>
+                                            <Section
+                                                title={section?.title}
+                                                description={section?.description}
+                                                helper={{ tooltip: section?.helper?.tooltip }}
+                                                actions={section?.actions}
+                                                contents={section.chart} />
+                                        </Flex>
+                                    </List.Item>
+                                )} />
+                                : <List grid={{ gutter: [16, 16], xs: 1, sm: 1, md: 1, lg: 2, xl: 2, xxl: 3 }} dataSource={dashboardSections} renderItem={(section) => (
+                                    <Section
+                                        title={section?.title}
+                                        description={section?.description}
+                                        helper={{ tooltip: section?.helper?.tooltip }}
+                                        actions={section?.actions}
+                                        contents={
+                                            <Card style={{ margin: '.25rem' }}>
+                                                {section.chart}
+                                            </Card>
+                                        } />
+                                )} />
+                            }
+                        </Flex>}
+                </Flex>
 
-                        <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
-                            <Section
-                                title="Categorias de Produto mais Vendidas"
-                                description="Compare o desempenho das categorias para entender quais segmentos impulsionam o faturamento."
-                                helper={{ tooltip: 'Permite foco em categorias estratégicas para promoções ou reposição de estoque.' }}
-                                contents={<Bar data={productCategoryComparison} xField="category" colorField="category" yField="orders" {...columnChartConfig} />}
-                            />
-                        </Col>
-
-                        <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
-                            <Section
-                                title="Canais de Venda"
-                                description="Analise a participação de cada canal (app, balcão, delivery) nas vendas totais."
-                                helper={{ tooltip: 'Orienta decisões de investimento e ações promocionais por canal.' }}
-                                contents={<Pie data={salesChannelsParticipation} colorField="channel" angleField="value" {...basicPieChartConfig} />}
-                            />
-                        </Col>
-
-                        <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
-                            <Section
-                                title="Taxa de Conversão"
-                                description="Veja quantos visitantes realmente concluem um pedido e otimize pontos de atrito."
-                                helper={{ tooltip: 'Ajuda a identificar gargalos no funil de vendas e oportunidades de melhoria.' }}
-                                contents={<Funnel data={conversionRate} xField="step" yField="value" label={{ text: (d) => `${d.step} \n ${d.value}` }} {...funnelChartConfig} />}
-                            />
-                        </Col>
-
-                        <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
-                            <Section
-                                title="Tipos de Pedido"
-                                description="Verifique a proporção entre pedidos para entrega, retirada ou consumo no local."
-                                helper={{ tooltip: 'Facilita decisões logísticas e melhorias no atendimento por modalidade.' }}
-                                contents={<Pie data={orderTypeDistribution} colorField="type" angleField="value" {...basicPieChartConfig} />}
-                            />
-                        </Col>
-
-                        <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
-                            <Section
-                                title="Tempo Médio de Preparo por Categoria"
-                                description="Meça o desempenho operacional e identifique gargalos por tipo de produto."
-                                helper={{ tooltip: 'Permite identificar categorias que atrasam entregas ou impactam a experiência do cliente.' }}
-                                contents={<Bar theme={props.theme} data={avgPrepTimeByCategory} xField="category" yField="time" colorField="category" group />}
-                            />
-                        </Col>
-
-                        <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
-                            <Section
-                                title="Comparativo de Vendas (Diário/Semanal)"
-                                description="Compare o desempenho entre dias e semanas para identificar tendências de crescimento ou queda."
-                                helper={{ tooltip: 'Ajuda no planejamento de promoções e avaliação de ações recentes.' }}
-                                contents={<Line data={weeklySalesComparison} theme={props.theme} colorField="item" seriesField="item" xField={(d) => new Date(d.date)} yField="orders" />}
-                            />
-                        </Col>
-
-                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
-                            <Section
-                                title="Cancelamentos e Reembolsos"
-                                description="Acompanhe a evolução dos cancelamentos e reembolsos para detectar problemas recorrentes."
-                                helper={{ tooltip: 'Permite identificar causas e horários com maiores taxas de cancelamento.' }}
-                                contents={
-                                    <Area
-                                        data={cancelRefundTrends}
-                                        xField="date"
-                                        yField="count"
-                                        theme={props.theme}
-                                        interaction={{ tooltip: { marker: false } }}
-                                        point={{ sizeField: 4, style: { stroke: 'orangered', fill: '#fff' } }}
-                                        line={{ style: { stroke: 'orangered', lineWidth: 2 } }}
-                                        style={{
-                                            fill: `linear-gradient(-90deg, ${props.theme === 'light' ? '#fff' : 'transparent'}, orangered 100%)`,
-                                        }}
-                                    />
-                                }
-                            />
-                        </Col>
-
-                        <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
-                            <Section
-                                title="Comparativo entre Estabelecimentos"
-                                description="Compare o desempenho de diferentes unidades ou franquias em relação às vendas."
-                                helper={{ tooltip: 'Facilita análises regionais e decisões de investimento ou padronização.' }}
-                                contents={<Line theme={props.theme} data={establishmentsComparison} xField="establishment" yField="sales" />}
-                            />
-                        </Col>
-
-                        <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
-                            <Section
-                                title="Horários de Pico e Sazonalidade"
-                                description="Identifique os horários e dias de maior movimento para melhor alocação de recursos."
-                                helper={{ tooltip: 'Permite ajustar escalas de equipe, estoque e campanhas para horários estratégicos.' }}
-                                contents={<Heatmap theme={props.theme} data={peakTimesSeasonality} xField="hour" yField="orders" colorField="cancels" sizeField={26} />}
-                            />
-                        </Col>
-
-                    </Row>
-
-                </Card>
-
-            </Row>
+            </Flex>
 
             <Section title={'Resumo dos Pedidos'} description={'Acompanhe de forma rápida o status dos pedidos em tempo real, incluindo os que estão em andamento, finalizados e com entrega concluída.'} helper={{ tooltip: 'Visualize o andamento dos pedidos em tempo real, desde a preparação até a entrega final. Ideal para monitorar a operação da cozinha e o fluxo de entregas.' }} contents={<Flex vertical gap={'large'} flex={1}>
 
@@ -575,7 +620,7 @@ export default function GeneralDashboardView(props) {
                         rowKey={'id'}
                         pagination={{ pageSize: 8 }}
                         rowSelection={{ type: 'checkbox' }}
-                        columns={orderCentralTableColumnDefault}
+                        columns={dashboardOrdersTableColumnDefault}
                         dataSource={lastOrders}
                     />
                 } />
@@ -587,7 +632,7 @@ export default function GeneralDashboardView(props) {
                         rowKey={'id'}
                         pagination={{ pageSize: 8 }}
                         rowSelection={{ type: 'checkbox' }}
-                        columns={orderCentralTableColumnDefault}
+                        columns={dashboardOrdersTableColumnDefault}
                         dataSource={inProgressOrders} />
                 } />
 
@@ -598,7 +643,7 @@ export default function GeneralDashboardView(props) {
                         rowKey={'id'}
                         pagination={{ pageSize: 8 }}
                         rowSelection={{ type: 'checkbox' }}
-                        columns={orderCentralTableColumnDefault}
+                        columns={dashboardOrdersTableColumnDefault}
                         dataSource={lastOrders} />
                 } />
 

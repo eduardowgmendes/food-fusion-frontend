@@ -1,4 +1,4 @@
-import { CheckCircleOutlined, ClockCircleFilled, CloseCircleOutlined } from "@ant-design/icons";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import RelativeTime from "../utils/RelativeTime";
 import { Tag } from "antd";
 
@@ -45,7 +45,6 @@ export const establishmentTableColumns = [
         title: "Culinária de Origem",
         dataIndex: "type",
         key: "type",
-        fixed: 'left',
         filters: Object.entries(typeConfig).map(([value, { text }]) => ({ text, value })),
         filterMode: "tree",
         filterSearch: true,

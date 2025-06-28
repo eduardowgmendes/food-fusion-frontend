@@ -1,6 +1,6 @@
-import { Card, Col, Flex, Layout, Row, Select, Tooltip } from "antd";
+import { Card, Col, Flex, Layout, Row, Segmented, Select, Tooltip } from "antd";
 import PageToolbar from "../components/layout/PageToolbar";
-import { KeyOutlined, ShopOutlined } from "@ant-design/icons";
+import { BarsOutlined, KeyOutlined, ShopOutlined } from "@ant-design/icons";
 import establishments from "../local/establishments.json";
 import GeneralDashboardView from "../components/views/GeneralDashboardView";
 import Title from "antd/es/typography/Title";
@@ -37,61 +37,56 @@ export default function Dashboard(props) {
     return (
         <Layout>
 
-            <Card variant="borderless" styles={{ body: { padding: 0 } }}>
+            <Flex vertical gap={'small'}>
 
-                <Flex vertical gap={'small'}>
+                <Flex vertical gap={'large'}>
 
-                    <Card variant="borderless">
+                    <PageToolbar title={pageToolbar.title} description={pageToolbar.description} actions={pageToolbar.actions} breadcrumb={[
+                        { title: <a href={'/'}>Home</a>, },
+                        { title: <a href={window.location.href}>Dashboard</a>, },
+                    ]} settings={pageToolbar.settings} />
 
-                        <Flex vertical gap={'large'}>
+                    <Flex vertical gap={'large'}>
 
-                            <PageToolbar title={pageToolbar.title} description={pageToolbar.description} actions={pageToolbar.actions} settings={pageToolbar.settings} />
+                        <Row gutter={[16, 16]}>
 
-                            <Flex vertical gap={'large'}>
+                            <Col span={24}>
 
-                                <Row gutter={[16, 16]}>
+                                <Flex vertical gap={'small'}>
 
-                                    <Col span={24}>
+                                    <Flex vertical flex={1}>
+                                        <Title level={4} style={{ margin: 0 }} ellipsis={{ rows: 1, expandable: false, symbol: '...' }}>Estabelecimento</Title>
+                                        <Paragraph type="secondary" style={{ margin: 0 }} ellipsis={{ rows: 1, expandable: false, symbol: '...' }}>Escolha um estabelecimento para visualizar e analisar métricas de desempenho individualizadas.</Paragraph>
+                                    </Flex>
 
-                                        <Flex vertical gap={'small'}>
+                                    <Tooltip title={'Escolha um estabelecimento para visualizar e analisar métricas de desempenho individualizadas.'}>
 
-                                            <Flex vertical flex={1}>
-                                                <Title level={4} style={{ margin: 0 }} ellipsis={{ rows: 1, expandable: false, symbol: '...' }}>Estabelecimento</Title>
-                                                <Paragraph type="secondary" style={{ margin: 0 }} ellipsis={{ rows: 1, expandable: false, symbol: '...' }}>Escolha um estabelecimento para visualizar e analisar métricas de desempenho individualizadas.</Paragraph>
-                                            </Flex>
+                                        <Select
+                                            prefix={<ShopOutlined />}
+                                            size="large"
+                                            placeholder='Selecionar Estabelecimento'
+                                            options={options}
+                                            onChange={handleChange} />
 
-                                            <Tooltip title={'Escolha um estabelecimento para visualizar e analisar métricas de desempenho individualizadas.'}>
+                                    </Tooltip>
 
-                                                <Select
-                                                    prefix={<ShopOutlined />}
-                                                    size="large"
-                                                    placeholder='Selecionar Estabelecimento'
-                                                    options={options}
-                                                    onChange={handleChange} />
+                                </Flex>
 
-                                            </Tooltip>
+                            </Col>
 
-                                        </Flex>
+                        </Row>
 
-                                    </Col>
+                        <Card variant={'outlined'}>
 
-                                </Row>
+                            {selected !== null ? (<EstablishmentDashboardView establishment={selected} theme={theme} />) : (<GeneralDashboardView theme={theme} />)}
 
-                                <Card variant={'outlined'}>
+                        </Card>
 
-                                    {selected !== null ? (<EstablishmentDashboardView establishment={selected} theme={theme} />) : (<GeneralDashboardView theme={theme} />)}
-
-                                </Card>
-
-                            </Flex>
-
-                        </Flex>
-
-                    </Card>
+                    </Flex>
 
                 </Flex>
 
-            </Card>
+            </Flex>
 
         </Layout >
     )

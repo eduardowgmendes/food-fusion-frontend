@@ -19,7 +19,7 @@ const AppRoutes = (props) => {
         <Router>
             <Suspense fallback={
                 <Flex vertical>
-                    <Flex vertical align="center" gap={'small'}>
+                    <Flex vertical align="center" gap={'small'} style={{height: '100vh'}}>
                         <LoadingOutlined />
                         <Paragraph type="secondary">Carregando...</Paragraph>
                     </Flex>

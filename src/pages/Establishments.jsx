@@ -1,8 +1,8 @@
-import { ExportOutlined, PlusOutlined } from "@ant-design/icons";
-import { Card, Flex, Grid, Layout, message, Result, Spin, Table } from "antd";
+import { ExportOutlined, PlusOutlined, SyncOutlined } from "@ant-design/icons";
+import { Breadcrumb, Card, Flex, Grid, Layout, message, Result, Spin, Table } from "antd";
 import Section from "../components/layout/Section";
 import { useEffect, useState } from "react";
-import { establishmentTableColumns } from "../configuration/extablishmentTableColumns";
+import { establishmentTableColumns } from "../configuration/establishmentTableColumns";
 import PageToolbar from "../components/layout/PageToolbar";
 import FoodFusionApiClient from "../api/FoodFusionApiClient";
 
@@ -70,58 +70,60 @@ export default function Establishments() {
     }
 
     return (
-        
+
         <Layout>
 
             {contextHolder}
-            
-            <Card variant="borderless" styles={{ body: { padding: 0 } }}>
 
-                <Flex vertical gap={'small'}>
+            <Flex vertical gap={'large'}>
+
+                <Flex vertical gap={'large'}>
+
+                    <PageToolbar title={pageToolbar.title} description={pageToolbar.description} actions={pageToolbar.actions} breadcrumb={[
+                        { title: <a href={'/'}>Home</a>, },
+                        { title: <a href={window.location.href}>Estabelecimentos</a>, },
+                    ]} settings={pageToolbar.settings} />
 
                     <Card variant="borderless">
 
-                        <Flex vertical gap={'large'}>
-
-                            <PageToolbar title={pageToolbar.title} description={pageToolbar.description} actions={pageToolbar.actions} settings={pageToolbar.settings} />
-
-                            <Section title={'Meus Estabelecimentos'} helper={{ tooltip: 'Lista seus estabelecimentos permitindo personalizá-los de maneira individual. Você pode ajustar informações, horários de funcionamento, cardápios e mais, garantindo que cada estabelecimento tenha uma identidade própria. Facilite o controle e a organização com ferramentas intuitivas para uma administração eficiente.' }} contents={
-                                loading ? (
-                                    <Flex vertical align="center" justify="center" style={{ minHeight: '50vh' }} gap={'small'}>
-                                        <Flex align="center" gap={'small'}>
-                                            <Spin size="large" tip="Carregando dados da API" />
-                                        </Flex>
+                        <Section title={'Meus Estabelecimentos'} helper={{ tooltip: 'Lista seus estabelecimentos permitindo personalizá-los de maneira individual. Você pode ajustar informações, horários de funcionamento, cardápios e mais, garantindo que cada estabelecimento tenha uma identidade própria. Facilite o controle e a organização com ferramentas intuitivas para uma administração eficiente.' }} actions={[{ href: '/establishments', name: 'Recarregar', icon: <SyncOutlined /> }]} contents={
+                            loading ? (
+                                <Flex vertical align="center" justify="center" style={{ minHeight: '50vh' }} gap={'small'}>
+                                    <Flex align="center" gap={'small'}>
+                                        <Spin size="large" tip="Carregando dados da API" />
                                     </Flex>
-                                ) : error ? (<Result
-                                    status={'error'}
-                                    title={error.message}
-                                    subTitle='Não há estabelecimentos para serem exibidos nesse momento.' />) : (
-                                    <Flex vertical gap={'small'}>
-                                        <Flex vertical justify="center" flex={1}>
-                                            {establishments ? <Table
-                                                bordered
-                                                scroll={{ x: 'max-content' }}
-                                                rowKey={'id'}
-                                                pagination={{ pageSize: 8 }}
-                                                rowSelection={{ type: 'checkbox' }}
-                                                onRow={(record) => ({
-                                                    onClick: () => handleRowClick(record),
-                                                })}
-                                                columns={establishmentTableColumns}
-                                                dataSource={establishments} />
-                                                : <Result status={'404'} title='Nenhum estabelecimento encontrado.' subTitle='Não há estabelecimentos para serem exibidos nesse momento.' />
-                                            }
-                                        </Flex>
-                                    </Flex>)
-                            } />
-
-                        </Flex>
+                                </Flex>
+                            ) : error ? (<Result
+                                status={'error'}
+                                title={error.message}
+                                subTitle='Não há estabelecimentos para serem exibidos nesse momento.' />) : (
+                                <Flex vertical gap={'small'}>
+                                    <Flex vertical justify="center" flex={1}>
+                                        {establishments ? <Table
+                                            bordered
+                                            scroll={{ x: 'max-content' }}
+                                            rowKey={'id'}
+                                            pagination={{ pageSize: 10 }}
+                                            rowSelection={{ type: 'checkbox' }}
+                                            onRow={(record) => ({
+                                                onClick: () => handleRowClick(record),
+                                            })}
+                                            columns={establishmentTableColumns}
+                                            dataSource={establishments} />
+                                            : <Result status={'404'} title='Nenhum estabelecimento encontrado.' subTitle='Não há estabelecimentos para serem exibidos nesse momento.' />
+                                        }
+                                    </Flex>
+                                </Flex>)
+                        } />
 
                     </Card>
 
                 </Flex>
 
-            </Card>
+
+            </Flex>
+
+
 
         </Layout >
     )

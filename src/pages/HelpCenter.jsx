@@ -46,8 +46,8 @@ import {
     IeOutlined,
     QuestionCircleOutlined
 } from '@ant-design/icons';
-import Search from "antd/es/transfer/search";
 import PageToolbar from "../components/layout/PageToolbar";
+import Search from "antd/es/input/Search";
 
 export default function HelpCenter() {
 
@@ -158,51 +158,58 @@ export default function HelpCenter() {
     return (
         <Layout>
 
-            <Card variant="borderless" styles={{ body: { padding: 0 } }}>
-                <Flex vertical gap={'small'}>
+            <Flex vertical gap={'small'}>
+
+                <Flex vertical gap={'large'}>
+
+                    <Flex vertical gap={'middle'}>
+
+                        <PageToolbar
+                            title={'Central de Ajuda'}
+                            description={'Bem-vindo à Central de Ajuda! Aqui você encontra um conjunto completo de conteúdos, guias e orientações para facilitar a utilização do nosso sistema de gerenciamento de estabelecimentos. Nosso objetivo é oferecer suporte eficiente para que você possa aproveitar ao máximo todas as funcionalidades da plataforma, esclarecendo dúvidas e solucionando eventuais dificuldades de forma rápida e prática.'}
+                            actions={null}
+                            breadcrumb={[
+                                { title: <a href={'/'}>Home</a>, },
+                                { title: <a href={window.location.href}>Central de Ajuda</a>, },
+                            ]}
+                            settings={null} />
+
+                        <Search placeholder="Localizar uma tópico de ajuda" enterButton="Buscar" onSearch={onSearch} size="large" allowClear />
+
+                    </Flex>
 
                     <Card variant="borderless">
 
-                        <Flex vertical gap={'large'}>
+                        <Section title={'Principais Tópicos de Ajuda'} description={'Encontre respostas rápidas para as dúvidas mais comuns. Aqui reunimos os assuntos mais buscados para ajudar você a aproveitar todos os recursos do sistema com facilidade. Explore os tópicos abaixo ou utilize a busca para localizar algo específico.'} contents={
 
-                            <PageToolbar title={'Central de Ajuda'} description={'Bem-vindo à Central de Ajuda! Aqui você encontra um conjunto completo de conteúdos, guias e orientações para facilitar a utilização do nosso sistema de gerenciamento de estabelecimentos. Nosso objetivo é oferecer suporte eficiente para que você possa aproveitar ao máximo todas as funcionalidades da plataforma, esclarecendo dúvidas e solucionando eventuais dificuldades de forma rápida e prática.'} actions={null} settings={null} />
+                            <Flex vertical gap={'middle'}>
 
-                            <Section icon={<QuestionCircleOutlined />} title={'Principais Tópicos de Ajuda'} contents={
-                                <Flex vertical gap={'middle'}>
+                                <List grid={{ gutter: 16, xs: 1, sm: 1, md: 1, lg: 1, xl: 2, xxl: 2 }} dataSource={helpCenterTopics} renderItem={(helpTopic) => (
+                                    <List.Item>
 
-                                    <Flex vertical gap={'middle'}>
-                                        <Search placeholder="Localizar uma tópico de ajuda" enterButton="Buscar" onSearch={onSearch} size="large" allowClear />
-                                    </Flex>
+                                        <Section title={helpTopic.category} description={helpTopic.description} contents={
+                                            <List dataSource={helpTopic.topics} renderItem={(topic) => (
+                                                <List.Item style={{ padding: '1rem 0rem 1rem 0rem' }}>
+                                                    <Flex align="center" gap={'middle'} flex={1}>
+                                                        <Avatar style={{ backgroundColor: `${topic.color}` }} icon={topic.icon} shape="square" size={'large'} />
+                                                        <Flex vertical flex={1}>
+                                                            <Paragraph style={{ fontWeight: "bold", margin: 0 }} ellipsis={{ rows: 1, expandable: false, symbol: '...' }}>{topic.title}</Paragraph>
+                                                            <Paragraph type="secondary" style={{ margin: 0 }} ellipsis={{ rows: 2, expandable: true, symbol: 'Ver mais.' }}>{topic.description}</Paragraph>
+                                                        </Flex>
+                                                    </Flex>
+                                                </List.Item>
+                                            )} />
+                                        } />
 
-                                    <List grid={{ gutter: 16, xs: 1, sm: 1, md: 1, lg: 1, xl: 2, xxl: 2 }} dataSource={helpCenterTopics} renderItem={(helpTopic) => (
-                                        <List.Item>
-                                            <Card variant="borderless" size="small">
-                                                <Section title={helpTopic.category} description={helpTopic.description} contents={
-                                                    <List dataSource={helpTopic.topics} renderItem={(topic) => (
-                                                        <List.Item style={{ padding: '1rem 0rem 1rem 0rem' }}>
-                                                            <Flex align="center" gap={'middle'} flex={1}>
-                                                                <Avatar style={{ backgroundColor: `${topic.color}` }} icon={topic.icon} shape="square" size={'large'} />
-                                                                <Flex vertical flex={1}>
-                                                                    <Paragraph style={{ fontWeight: "bold", margin: 0 }} ellipsis={{ rows: 1, expandable: false, symbol: '...' }}>{topic.title}</Paragraph>
-                                                                    <Paragraph type="secondary" style={{ margin: 0 }} ellipsis={{ rows: 2, expandable: true, symbol: 'Ver mais.' }}>{topic.description}</Paragraph>
-                                                                </Flex>
-                                                            </Flex>
-                                                        </List.Item>
-                                                    )} />
-                                                } />
-                                            </Card>
-                                        </List.Item>
-                                    )} />
-                                </Flex>
-                            } />
-
-                        </Flex>
-
+                                    </List.Item>
+                                )} />
+                            </Flex>
+                        } />
                     </Card>
 
                 </Flex>
 
-            </Card>
+            </Flex>
 
         </Layout >
     )

@@ -1,8 +1,8 @@
-import { Avatar, Badge, Button, Col, ConfigProvider, Flex, Grid, Layout, Menu, Row, Segmented, theme, Tooltip } from 'antd'
+import { Avatar, Badge, Button, Col, ConfigProvider, Flex, Grid, Layout, Menu, Row, Segmented, Spin, theme, Tooltip } from 'antd'
 import Sider from 'antd/es/layout/Sider'
 import { Content, Header } from 'antd/es/layout/layout'
 import { useEffect, useState } from 'react'
-import { AlertOutlined, AppstoreFilled, DashboardOutlined, HomeOutlined, LeftOutlined, MenuOutlined, MoonOutlined, PlayCircleOutlined, ProductOutlined, QuestionCircleOutlined, SettingOutlined, ShopOutlined, SunOutlined } from '@ant-design/icons'
+import { AlertOutlined, AppstoreFilled, DashboardOutlined, HomeOutlined, LeftOutlined, LoadingOutlined, MenuOutlined, MoonOutlined, PlayCircleOutlined, ProductOutlined, QuestionCircleOutlined, SettingOutlined, ShopOutlined, SunOutlined } from '@ant-design/icons'
 import Paragraph from 'antd/es/typography/Paragraph'
 import AppRoutes from './AppRoutes'
 import './App.css'
@@ -19,6 +19,7 @@ function App() {
 
   const [collapsed, setCollapsed] = useState(menuCollapse)
   const [darkMode, setDarkMode] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (savedTheme) {
@@ -27,9 +28,13 @@ function App() {
   }, [])
 
   const handleThemeChange = (value) => {
+    setLoading(true)
     const isDarkMode = value === 'dark'
     setDarkMode(value === 'dark')
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light')
+    setTimeout(() => {
+      setLoading(false)
+    }, 300)
   }
 
   const handleMenuCollapse = () => {
@@ -141,7 +146,6 @@ function App() {
               </Row>
             </Header>
 
-
             <Row gutter={[16, 16]}>
 
               <Col xs={{ span: 24, offset: 0 }}
@@ -154,10 +158,15 @@ function App() {
                 <Content style={{
                   overflowX: 'hidden',
                   overflowY: 'auto',
-                  height: '94vh'
+                  height: '94vh',
+                  padding: '1rem'
                 }}>
 
-                  <AppRoutes routesSettings={routesSettings} theme={savedTheme} />
+                  {loading ? (<Flex vertical align="center" justify="center" style={{ minHeight: '100vh' }} gap={'small'}>
+                    <Flex align="center" gap={'small'}>
+                      <Spin size="large" indicator={<LoadingOutlined spin />} tip="Carregando..." />
+                    </Flex>
+                  </Flex>) : (<AppRoutes routesSettings={routesSettings} theme={savedTheme} />)}
 
                 </Content>
 

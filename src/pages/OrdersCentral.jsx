@@ -79,50 +79,53 @@ export default function OrderCentral() {
     return (
         <Layout>
 
-            <Card variant="borderless" styles={{ body: { padding: 0 } }}>
+            <Flex vertical gap={'large'}>
 
-                <Flex vertical gap={'small'}>
+                <Flex vertical gap={'large'}>
+
+                    <PageToolbar
+                        title={pageToolbar.title}
+                        description={pageToolbar.description}
+                        actions={pageToolbar.actions}
+                        breadcrumb={[
+                            { title: <a href="/">Home</a> },
+                            { title: <a href="/orders">Central de Pedidos</a> }]}
+                        settings={pageToolbar.settings} />
+
+                    <Search size="large" onSearch={onSearch} placeholder="Pesquise pedidos por nome, cliente, tipo de estabelecimento ou status..." enterButton='Buscar' />
 
                     <Card variant="borderless">
 
-                        <Flex vertical gap={'large'}>
+                        <Section title={'Últimos Pedidos'} description={'Visualize rapidamente os pedidos mais recentes realizados no sistema. Acompanhe o status, revise os detalhes e gerencie cada etapa com facilidade e agilidade.'} helper={{ tooltip: 'Veja os últimos pedidos recebidos e mantenha o controle das vendas em tempo real.' }} contents={
+                            loading ? (
+                                <Flex vertical align="center" justify="center" style={{ minHeight: '50vh' }} gap={'small'}>
+                                    <Flex align="center" gap={'small'}>
+                                        <Spin size="large" tip='Carregando dados da API' />
+                                    </Flex>
+                                </Flex>) : (<Flex vertical gap={'small'}>
+                                    <Flex vertical justify="center" flex={1}>
+                                        {orders ?
+                                            <Table
+                                                bordered
+                                                scroll={{ x: 'max-content' }}
+                                                rowKey={"id"}
+                                                pagination={{ pageSize: 8 }}
+                                                rowSelection={{ type: 'checkbox' }}
+                                                onRow={(record) => ({
+                                                    onClick: () => handleRowClick(record),
+                                                })}
+                                                columns={orderCentralTableColumnDefault}
+                                                dataSource={orders} />
+                                            : <Result status={'404'} title='Nenhum pedido encontrado.' subTitle='Não há pedidos para serem exibidos nesse momento.' />}
+                                    </Flex>
+                                </Flex>)
 
-                            <PageToolbar title={pageToolbar.title} description={pageToolbar.description} actions={pageToolbar.actions} settings={pageToolbar.settings} />
-                            <Search size="large" onSearch={onSearch} placeholder="Pesquise pedidos por nome, cliente, tipo de estabelecimento ou status..." enterButton='Buscar' />
-
-                            <Section title={'Últimos Pedidos'} helper={{ tooltip: 'Veja os últimos pedidos recebidos e mantenha o controle das vendas em tempo real.' }} contents={
-                                loading ? (
-                                    <Flex vertical align="center" justify="center" style={{ minHeight: '50vh' }} gap={'small'}>
-                                        <Flex align="center" gap={'small'}>
-                                            <Spin size="large" tip='Carregando dados da API' />
-                                        </Flex>
-                                    </Flex>) : (<Flex vertical gap={'small'}>
-                                        <Flex vertical justify="center" flex={1}>
-                                            {orders ?
-                                                <Table
-                                                    bordered
-                                                    scroll={{ x: 'max-content' }}
-                                                    rowKey={"id"}
-                                                    pagination={{ pageSize: 8 }}
-                                                    rowSelection={{ type: 'checkbox' }}
-                                                    onRow={(record) => ({
-                                                        onClick: () => handleRowClick(record),
-                                                    })}
-                                                    columns={orderCentralTableColumnDefault}
-                                                    dataSource={orders} />
-                                                : <Result status={'404'} title='Nenhum pedido encontrado.' subTitle='Não há pedidos para serem exibidos nesse momento.' />}
-                                        </Flex>
-                                    </Flex>)
-
-                            } />
-
-                        </Flex>
-
+                        } />
                     </Card>
 
                 </Flex>
 
-            </Card>
+            </Flex>
 
         </Layout>
     )

@@ -624,17 +624,25 @@ export default function Settings(props) {
             <Flex vertical gap={'large'}>
 
                 <Flex vertical gap={'large'} flex={1}>
-                    <Card variant="borderless" style={{ overflow: 'hidden', height: '92vh' }}>
-                        <Row gutter={[16, 16]}>
+                    <Row gutter={[16, 16]}>
 
-                            <Col span={24}>
-                                <Flex vertical gap={'middle'}>
-                                    <PageToolbar title={'Configurações'} description={'Gerencie de forma centralizada as principais configurações do seu sistema. Personalize informações da aplicação, controle o estoque e ajuste o cardápio digital. Otimize processos administrativos, operacionais e estratégicos do seu negócio.'} actions={null} settings={null} />
-                                    <Search placeholder="Localizar uma configuração" enterButton="Buscar" onSearch={onSearch} size="large" allowClear />
-                                </Flex>
-                            </Col>
+                        <Col span={24}>
+                            <Flex vertical gap={'middle'}>
+                                <PageToolbar
+                                    title={'Configurações'}
+                                    description={'Gerencie de forma centralizada as principais configurações do seu sistema. Personalize informações da aplicação, controle o estoque e ajuste o cardápio digital. Otimize processos administrativos, operacionais e estratégicos do seu negócio.'}
+                                    actions={null}
+                                    breadcrumb={[
+                                        { title: <a href={'/'}>Home</a>, },
+                                        { title: <a href={window.location.href}>Configurações</a>, },
+                                    ]}
+                                    settings={null} />
+                                <Search placeholder="Localizar uma configuração" enterButton="Buscar" onSearch={onSearch} size="large" allowClear />
+                            </Flex>
+                        </Col>
 
-                            <Col span={24}>
+                        <Col span={24}>
+                            <Card variant='borderless'>
 
                                 <Splitter>
                                     <Splitter.Panel defaultSize={'32%'} min={'32%'} max={'48%'}>
@@ -721,10 +729,10 @@ export default function Settings(props) {
 
                                     </Splitter.Panel>
                                 </Splitter>
-                            </Col>
+                            </Card>
+                        </Col>
+                    </Row>
 
-                        </Row>
-                    </Card>
                 </Flex>
             </Flex >
         </Layout >
